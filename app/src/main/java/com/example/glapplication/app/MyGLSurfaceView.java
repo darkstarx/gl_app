@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.opengl.GLSurfaceView;
 
 import com.example.glapplication.app.util.Util;
 import javax.microedition.khronos.opengles.GL10;
@@ -15,7 +16,7 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class MyGLSurfaceView extends SurfaceView  implements SurfaceHolder.Callback {
 
-    public interface Renderer extends android.opengl.GLSurfaceView.Renderer
+    public interface Renderer extends GLSurfaceView.Renderer
     {
         public boolean swap_required();
         public int[] getConfigSpec();
@@ -39,7 +40,7 @@ public class MyGLSurfaceView extends SurfaceView  implements SurfaceHolder.Callb
     };
 
 
-    public static final long GL_TASK_INTERVAL = 3000; /* ms */
+    public static final long GL_TASK_INTERVAL = 16; /* ms */
     private MyHandlerThread m_ht = null;
     private Renderer m_renderer = null;
     private EglHelper m_egl = null;
