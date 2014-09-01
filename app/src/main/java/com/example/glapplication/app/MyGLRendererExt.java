@@ -153,8 +153,13 @@ public class MyGLRendererExt extends MyGLRenderer {
                 mModelMatrix, mViewMatrix, mProjectionMatrix);
 
         useProgram(mTexProgramHandle);
+
+        Matrix.setIdentityM(mModelMatrix, 0);
+        Matrix.translateM(mModelMatrix, 0, -1.0f, 0.0f, 0.0f);
+        Matrix.rotateM(mModelMatrix, 0, 0.1f, 0.0f, 1.0f, 0.0f);
         square.draw(mPositionHandle, mColorHandle, mMVPMatrixHandle, mTexUniformHandle, mTexCoordHandle,
                 mModelMatrix, mViewMatrix, mProjectionMatrix);
+
         useProgram(mSimpleProgramHandle);
 
 //        Log.i(Util.LOG_TAG, "renderer: draw frame");
@@ -214,10 +219,7 @@ public class MyGLRendererExt extends MyGLRenderer {
               + "varying vec2 v_TexCoordinate;  \n"     // Interpolated texture coordinate per fragment.
               + "void main()                    \n"	    // The entry point for our fragment shader.
               + "{                              \n"
-              + "   diffuse = diffuse * (1.0 / (1.0 + (0.10 * distance)));\n"     // Add attenuation.
-              + "   diffuse = diffuse + 0.3;    \n"                               // Add ambient lighting
-              // Multiply the color by the diffuse illumination level and texture value to get final output color.
-              + "   gl_FragColor = (v_Color * diffuse * texture2D(u_Texture, v_TexCoordinate));\n"	    // Pass the color directly through the pipeline.
+              + "   gl_FragColor = (v_Color * texture2D(u_Texture, v_TexCoordinate));\n"	    // Pass the color directly through the pipeline.
               + "}                              \n";
 
 

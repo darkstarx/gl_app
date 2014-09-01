@@ -95,7 +95,7 @@ public class Square {
         indexBuffer.position(0);
 
         // a float is 4 bytes, therefore we multiply the number if vertices with 4.
-        ByteBuffer tbb = ByteBuffer.allocateDirect(textureCoords.length * 2);
+        ByteBuffer tbb = ByteBuffer.allocateDirect(textureCoords.length * 4);
         tbb.order(ByteOrder.nativeOrder());
         texBuffer = tbb.asFloatBuffer();
         texBuffer.put(textureCoords);
@@ -154,7 +154,9 @@ public class Square {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, tex[0]);
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
-        GLES20.glCopyTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, 0, 0, mWidth, mHeight, 0);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glCopyTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGB, 0, 0, mWidth, mHeight, 0);
 
         // Pass in the texture id
         GLES20.glUniform1i(texHandle, tex[0]);

@@ -26,6 +26,10 @@ public abstract class MyGLRenderer implements MyGLSurfaceView.Renderer
     {
         final int EGL_OPENGL_ES2_BIT = 4;
         int[] configSpec = {
+//            EGL10.EGL_RED_SIZE, 8,
+//            EGL10.EGL_GREEN_SIZE, 8,
+//            EGL10.EGL_BLUE_SIZE, 8,
+//            EGL10.EGL_ALPHA_SIZE, 0,
             EGL10.EGL_SURFACE_TYPE, EGL10.EGL_WINDOW_BIT,
             EGL10.EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
             EGL10.EGL_NONE
